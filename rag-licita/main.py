@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_openai import OpenAIEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.tools import tool
@@ -24,6 +24,8 @@ splitter = RecursiveCharacterTextSplitter(
 chunks = splitter.split_documents(documents)
 
 print(f"Loaded {len(documents)} documents from PDF file.")
+
+# embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 # Embeddings configurados via OpenRouter
 embeddings = OpenAIEmbeddings(
@@ -60,7 +62,7 @@ system_prompt = (
 )
 
 llm = ChatOpenAI(
-    model="deepseek/deepseek-v4-flash",  # Ou outro modelo suportado no OpenRouter
+    model="inclusionai/ling-3.0-flash-vl:free",  # Ou outro modelo suportado no OpenRouter
     openai_api_base="https://openrouter.ai/api/v1",
     openai_api_key=os.getenv("OPENROUTER_API_KEY")
 )
