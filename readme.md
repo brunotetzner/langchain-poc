@@ -9,3 +9,7 @@ python3 -m venv .venv
 ### Activating VENV
 
 source .venv/bin/activate
+
+
+### Running APP
+
